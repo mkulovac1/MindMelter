@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mindmelter-backend", "mindmelter-backend\mindmelter-backend.csproj", "{3F0B31E8-22A1-4E4F-B94D-BCB0DE4D521B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F0B31E8-22A1-4E4F-B94D-BCB0DE4D521B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F0B31E8-22A1-4E4F-B94D-BCB0DE4D521B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F0B31E8-22A1-4E4F-B94D-BCB0DE4D521B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F0B31E8-22A1-4E4F-B94D-BCB0DE4D521B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {710BF7B0-D485-4CA4-AA98-2BDDA987E942}
+	EndGlobalSection
+EndGlobal
