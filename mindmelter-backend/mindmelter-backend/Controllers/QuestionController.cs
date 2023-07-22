@@ -11,16 +11,16 @@ namespace mindmelter_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionsController : ControllerBase
+    public class QuestionController : ControllerBase
     {
         private readonly QuizDbContext _context;
 
-        public QuestionsController(QuizDbContext context)
+        public QuestionController(QuizDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Questions
+        // GET: api/Question
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()
         {
@@ -31,7 +31,7 @@ namespace mindmelter_backend.Controllers
             return await _context.Questions.ToListAsync();
         }
 
-        // GET: api/Questions/5
+        // GET: api/Question/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Question>> GetQuestion(int id)
         {
@@ -49,7 +49,7 @@ namespace mindmelter_backend.Controllers
             return question;
         }
 
-        // PUT: api/Questions/5
+        // PUT: api/Question/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuestion(int id, Question question)
@@ -80,7 +80,7 @@ namespace mindmelter_backend.Controllers
             return NoContent();
         }
 
-        // POST: api/Questions
+        // POST: api/Question
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Question>> PostQuestion(Question question)
@@ -95,7 +95,7 @@ namespace mindmelter_backend.Controllers
             return CreatedAtAction("GetQuestion", new { id = question.QuestionId }, question);
         }
 
-        // DELETE: api/Questions/5
+        // DELETE: api/Question/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuestion(int id)
         {

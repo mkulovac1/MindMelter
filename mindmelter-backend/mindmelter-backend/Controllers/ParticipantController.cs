@@ -11,16 +11,16 @@ namespace mindmelter_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParticipantsController : ControllerBase
+    public class ParticipantController : ControllerBase
     {
         private readonly QuizDbContext _context;
 
-        public ParticipantsController(QuizDbContext context)
+        public ParticipantController(QuizDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Participants
+        // GET: api/Participant
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Participant>>> GetParticipants()
         {
@@ -31,9 +31,9 @@ namespace mindmelter_backend.Controllers
             return await _context.Participants.ToListAsync();
         }
 
-        // GET: api/Participants/5
+        // GET: api/Participant/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Participant>> GetParticipant(string id)
+        public async Task<ActionResult<Participant>> GetParticipant(int id)
         {
           if (_context.Participants == null)
           {
@@ -49,12 +49,12 @@ namespace mindmelter_backend.Controllers
             return participant;
         }
 
-        // PUT: api/Participants/5
+        // PUT: api/Participant/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutParticipant(string id, Participant participant)
+        public async Task<IActionResult> PutParticipant(int id, Participant participant)
         {
-            if (id != participant.ParipantId)
+            if (id != participant.ParticipantId)
             {
                 return BadRequest();
             }
@@ -80,52 +80,29 @@ namespace mindmelter_backend.Controllers
             return NoContent();
         }
 
-        // POST: api/Participants
+        // POST: api/Participant
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Participant>> PostParticipant(Participant participant)
         {
-            // provjera je li postoji vec:
-            var checkParticipant = _context.Participants.Where(p => p.Name == participant.Name && p.Email == participant.Email).FirstOrDefault();
-              
-            if(checkParticipant == null)
+            var provjera = _context.Participants.Where(x => x.Email == participant.Email && x.Name == participant.Name).FirstOrDefault();
+
+            if(provjera == null)
             {
                 _context.Participants.Add(participant);
                 await _context.SaveChangesAsync();
             }
             else
-                participant = checkParticipant;
-
-
-            /* if (_context.Participants == null)
-            {
-                return Problem("Entity set 'QuizDbContext.Participants'  is null.");
-            }
-          _context.Participants.Add(participant);
-          try
-          {
-              await _context.SaveChangesAsync();
-          }
-          catch (DbUpdateException)
-          {
-              if (ParticipantExists(participant.ParipantId))
-              {
-                  return Conflict();
-              }
-              else
-              {
-                  throw;
-              }
-          }*/
-
+                participant = provjera;
 
             return Ok(participant);
-            // return CreatedAtAction("GetParticipant", new { id = participant.ParipantId }, participant);
+
+            // return CreatedAtAction("GetParticipant", new { id = participant.ParticipantId }, participant);
         }
 
-        // DELETE: api/Participants/5
+        // DELETE: api/Participant/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteParticipant(string id)
+        public async Task<IActionResult> DeleteParticipant(int id)
         {
             if (_context.Participants == null)
             {
@@ -143,9 +120,9 @@ namespace mindmelter_backend.Controllers
             return NoContent();
         }
 
-        private bool ParticipantExists(string id)
+        private bool ParticipantExists(int id)
         {
-            return (_context.Participants?.Any(e => e.ParipantId == id)).GetValueOrDefault();
+            return (_context.Participants?.Any(e => e.ParticipantId == id)).GetValueOrDefault();
         }
     }
 }

@@ -7,7 +7,8 @@ namespace mindmelter_backend.Models
     public class Participant
     {
         [Key]
-        public string ParipantId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ParticipantId { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
         public string Email { get; set; }

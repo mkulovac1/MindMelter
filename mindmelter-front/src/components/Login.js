@@ -3,6 +3,7 @@ import { Button, TextField, Card, CardContent, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Center from './Center'
 import useForm from '../hooks/useForm'
+import { ENDPOINTS, createAPIEndpoint } from '../services'
 
 
 
@@ -24,8 +25,19 @@ export default function Login() {
     
     const login = e => {
         e.preventDefault();
-        if(validate()) 
-            console.log(values);
+
+        let saljiOvo = {
+            participantId: 0,
+            email: values.email,
+            name: values.name,
+            score: 0,
+            timeTaken: 0
+        }
+
+        // console.log(saljiOvo)
+        // console.log(values)
+        createAPIEndpoint(ENDPOINTS.participant).post(values).then(res => console.log(res)).catch(err => console.log(err))
+    
     }
 
     const validate = () => {

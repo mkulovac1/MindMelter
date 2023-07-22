@@ -23,8 +23,11 @@ namespace mindmelter_backend.Migrations
 
             modelBuilder.Entity("mindmelter_backend.Models.Participant", b =>
                 {
-                    b.Property<string>("ParipantId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ParticipantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ParticipantId"), 1L, 1);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -40,7 +43,7 @@ namespace mindmelter_backend.Migrations
                     b.Property<int>("TimeTaken")
                         .HasColumnType("int");
 
-                    b.HasKey("ParipantId");
+                    b.HasKey("ParticipantId");
 
                     b.ToTable("Participants");
                 });
