@@ -24,11 +24,18 @@ namespace mindmelter_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()
         {
-          if (_context.Questions == null)
-          {
-              return NotFound();
-          }
-            return await _context.Questions.ToListAsync();
+            var randomFiveQuestions = await(_context.Questions.
+                Select(x => new
+                {
+                    QuestionId = x.QuestionId,
+                    QuestionInWords = x.QuestionInWords,
+                    ImageName = x.ImageName,
+                    Options = new string[] {x.Option1, x.Option2, x.Option3, x.Option4}
+                }).OrderBy(y => Guid.NewGuid()).
+                Take(5)).ToListAsync();
+                
+            return Ok(randomFiveQuestions);
+          // return await _context.Questions.ToListAsync();
         }
 
         // GET: api/Question/5
