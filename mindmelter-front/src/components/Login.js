@@ -1,19 +1,24 @@
 import React from 'react'
-import { Button, TextField, Card, CardContent, Typography } from '@mui/material'
+import { Button, TextField, Card, CardContent, Typography, useStepContext } from '@mui/material'
 import { Box } from '@mui/system'
 import Center from './Center'
 import useForm from '../hooks/useForm'
 import { ENDPOINTS, createAPIEndpoint } from '../services'
+import useStateContext from '../hooks/useStateContext'
+import { useNavigate } from 'react-router-dom'
 
 
+const getFreshModelObject = () => ({
+    name: '',
+    email: ''
+})
 
 
 export default function Login() {
     
-    const getFreshModelObject = () => ({
-        name: '',
-        email: ''
-    })
+    const {context, setContext} = useStateContext()
+
+    const navigate = useNavigate()
 
     const {
         values,
@@ -36,7 +41,11 @@ export default function Login() {
 
         // console.log(saljiOvo)
         // console.log(values)
-        createAPIEndpoint(ENDPOINTS.participant).post(values).then(res => console.log(res)).catch(err => console.log(err))
+        createAPIEndpoint(ENDPOINTS.participant).post(values).then(res => {
+            setContext({participantId: res.data.participantId})
+            navigate('/quiz')
+            // console.log(context)
+        }).catch(err => console.log(err))
     
     }
 
