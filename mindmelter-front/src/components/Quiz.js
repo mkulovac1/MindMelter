@@ -77,7 +77,12 @@ export default function Quiz() {
             </Box>
 
             {questions[questionIndex].imageName != null
-                ? <CardMedia component="img" image={BASE_URL + 'images/' + questions[questionIndex].imageName}/> : null
+                ? <CardMedia component="img" image={BASE_URL + 'images/' + questions[questionIndex].imageName}
+                    sx = {{
+                        width: 'auto',
+                        m: '10px auto'
+                    }}
+                /> : null
             }
 
             <CardContent>

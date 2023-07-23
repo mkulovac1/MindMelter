@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, TextField, Card, CardContent, Typography, useStepContext } from '@mui/material'
 import { Box } from '@mui/system'
 import Center from './Center'
@@ -14,9 +14,10 @@ const getFreshModelObject = () => ({
 })
 
 
+
 export default function Login() {
     
-    const {context, setContext} = useStateContext()
+    const {context, setContext, resetContext} = useStateContext()
 
     const navigate = useNavigate()
 
@@ -28,6 +29,11 @@ export default function Login() {
         handleInputChange
     } = useForm(getFreshModelObject);
     
+
+    useEffect(() => {
+        resetContext()
+    }, [])
+
     const login = e => {
         e.preventDefault();
 
